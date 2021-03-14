@@ -6,9 +6,8 @@ import androidx.lifecycle.*
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.PictureOfDay
-import com.udacity.asteroidradar.api.NasaAPI
 
-import com.udacity.asteroidradar.api.NasaService
+import com.udacity.asteroidradar.api.NasaApi
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.getDataBase
 import com.udacity.asteroidradar.repository.AsteroidRepository
@@ -34,7 +33,7 @@ class MainViewModel(application:Application) : AndroidViewModel(application) {
     init {
         viewModelScope.launch {
             asteroidRepo.refreshDatabase()
-            _pictureOfDay.value = NasaAPI.retrofitService.getPictureOfDay(Constants.apiKey)
+            _pictureOfDay.value = NasaApi.retrofitService.getPictureOfDay(Constants.apiKey)
             Log.d(TAG, "Picture of day url is ${pictureOfDay.value!!.url}")
         }
 

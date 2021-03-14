@@ -18,17 +18,17 @@ private const val TAG = "AsteroidRepository"
 class AsteroidRepository (private val database:AsteroidDatabase){
 
     val asteroids: LiveData<List<Asteroid>> = Transformations.map(
-        database.asteroidDao.getAsteroids(LocalDateExt.dateNowFormatted())){
+            database.asteroidDao.getAsteroids(LocalDateExt.dateNowFormatted())){
         it.asDomainModel()
     }
     suspend fun refreshDatabase(){
 
         try {
             withContext(Dispatchers.IO){
-                val asteroidJsonString = NasaAPI.retrofitService.getAsteroids(LocalDateExt.dateNowFormatted(),Constants.apiKey)
+                val asteroidJsonString = NasaApi.retrofitService.getAsteroids(LocalDateExt.dateNowFormatted(),Constants.apiKey)
 
                 val asteroidOfDatabase = NetworkAsteroidContainer(
-                    parseAsteroidsJsonResult(JSONObject(asteroidJsonString))
+                        parseAsteroidsJsonResult(JSONObject(asteroidJsonString))
                 ).asDatabaseModel()
                 database.asteroidDao.insertAll(*asteroidOfDatabase)
             }
