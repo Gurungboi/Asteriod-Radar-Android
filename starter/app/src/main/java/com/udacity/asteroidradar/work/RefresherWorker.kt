@@ -7,7 +7,7 @@ import com.udacity.asteroidradar.database.getDataBase
 import com.udacity.asteroidradar.repository.AsteroidRepository
 import java.lang.Exception
 
-class AsteroidRefresherWorker(private val context: Context, params:WorkerParameters):CoroutineWorker(context,params){
+class RefresherWorker(private val context: Context, params:WorkerParameters):CoroutineWorker(context,params){
     companion object{
         const val WORK_NAME = "RefreshAsteroid"
     }

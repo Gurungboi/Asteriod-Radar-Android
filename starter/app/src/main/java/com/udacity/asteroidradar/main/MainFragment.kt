@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 
-private const val TAG = "MainFragment"
 class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by lazy {

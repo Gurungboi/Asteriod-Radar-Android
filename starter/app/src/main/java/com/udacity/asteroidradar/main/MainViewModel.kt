@@ -14,8 +14,6 @@ import com.udacity.asteroidradar.repository.AsteroidRepository
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
-private const val TAG = "MainViewModel"
-
 class MainViewModel(application:Application) : AndroidViewModel(application) {
 
     private val database = getDataBase(application)
@@ -34,8 +32,7 @@ class MainViewModel(application:Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             asteroidRepo.refreshDatabase()
             _pictureOfDay.value = NasaApi.retrofitService.getPictureOfDay(Constants.apiKey)
-            Log.d(TAG, "Picture of day url is ${pictureOfDay.value!!.url}")
-        }
+         }
 
     }
     val asteroids = asteroidRepo.asteroids

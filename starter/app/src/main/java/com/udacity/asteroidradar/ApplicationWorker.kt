@@ -2,7 +2,7 @@ package com.udacity.asteroidradar
 
 import android.app.Application
 import androidx.work.*
-import com.udacity.asteroidradar.work.AsteroidRefresherWorker
+import com.udacity.asteroidradar.work.RefresherWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,13 +24,13 @@ class ApplicationWorker : Application(){
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .setRequiresCharging(true)
             .build()
-        val repeatingWork = PeriodicWorkRequestBuilder<AsteroidRefresherWorker>(1,TimeUnit.DAYS)
+        val repeatingWork = PeriodicWorkRequestBuilder<RefresherWorker>(1,TimeUnit.DAYS)
             .setConstraints(constraints)
             .build()
 
 
         WorkManager.getInstance().enqueueUniquePeriodicWork(
-            AsteroidRefresherWorker.WORK_NAME,
+            RefresherWorker.WORK_NAME,
             ExistingPeriodicWorkPolicy.KEEP,
             repeatingWork
         )
