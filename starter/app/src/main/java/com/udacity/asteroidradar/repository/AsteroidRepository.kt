@@ -14,7 +14,6 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.lang.Exception
 
-private const val TAG = "AsteroidRepository"
 class AsteroidRepository (private val database:AsteroidDatabase){
 
     val asteroids: LiveData<List<Asteroid>> = Transformations.map(
@@ -33,7 +32,7 @@ class AsteroidRepository (private val database:AsteroidDatabase){
                 database.asteroidDao.insertAll(*asteroidOfDatabase)
             }
         }catch (e:Exception){
-            Log.d(TAG, "refreshDatabase:Got error ->  ${e.message}")
+            Log.d("Repository", "refreshDatabase:Got error ->  ${e.message}")
         }
     }
 }
